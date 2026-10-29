@@ -21,7 +21,7 @@ class Settings:
     hh_redirect_uri: str = os.getenv("HH_REDIRECT_URI", "http://localhost:8000/callback")
     hh_user_agent: str = os.getenv(
         "HH_USER_AGENT",
-        "JobPulse/1.0 (academic-research-cis; https://github.com/your-username/jobpulse)",
+        "JobPulse/1.0 (academic-research-cis; https://github.com/tarasssevich/jobPulse)",
     )
 
     # Storage paths

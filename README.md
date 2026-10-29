@@ -93,7 +93,7 @@ jobpulse/
 Требуется **Python 3.12+**. Рекомендуется использовать современный пакетный менеджер [`uv`](https://github.com/astral-sh/uv):
 
 ```bash
-git clone https://github.com/your-username/jobpulse.git
+git clone https://github.com/tarasssevich/jobPulse.git
 cd jobpulse
 
 # Создание виртуального окружения
