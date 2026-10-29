@@ -3,7 +3,27 @@
 import pytest
 import responses
 
+from src.collection.auth import obtain_app_token
 from src.collection.hh_client import HeadHunterClient, HHApiError
+
+
+@responses.activate
+def test_obtain_app_token_success():
+    """Verify headless client_credentials token acquisition."""
+    responses.add(
+        responses.POST,
+        "https://api.hh.ru/token",
+        json={"access_token": "APPL_TEST_TOKEN_123", "token_type": "bearer"},
+        status=200,
+    )
+
+    token = obtain_app_token(
+        client_id="TEST_ID",
+        client_secret="TEST_SECRET",
+        save_to_env=False,
+        force_refresh=True,
+    )
+    assert token == "APPL_TEST_TOKEN_123"
 
 
 @responses.activate

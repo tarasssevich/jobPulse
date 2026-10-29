@@ -149,6 +149,18 @@ class HeadHunterClient:
                 time.sleep(wait_time)
                 continue
 
+            if response.status_code == 403 and settings.hh_client_id and settings.hh_client_secret:
+                logger.info("Received 403 Forbidden; attempting automatic app token acquisition...")
+                try:
+                    from src.collection.auth import obtain_app_token
+
+                    new_token = obtain_app_token(save_to_env=True)
+                    self.access_token = new_token
+                    self.session.headers["Authorization"] = f"Bearer {new_token}"
+                    continue
+                except Exception as auth_err:  # noqa: BLE001
+                    logger.warning("Automatic token acquisition failed: %s", auth_err)
+
             if response.status_code == 404:
                 raise HHApiError(f"Resource not found (404): {url}", status_code=404)
 
