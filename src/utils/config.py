@@ -20,6 +20,7 @@ class Settings:
     hh_client_id: str = os.getenv("HH_CLIENT_ID", "")
     hh_client_secret: str = os.getenv("HH_CLIENT_SECRET", "")
     hh_redirect_uri: str = os.getenv("HH_REDIRECT_URI", "http://localhost:8000/callback")
+    hh_oauth_host: str = os.getenv("HH_OAUTH_HOST", "rabota.by")
     hh_access_token: str = os.getenv("HH_ACCESS_TOKEN", "")
     hh_user_agent: str = os.getenv(
         "HH_USER_AGENT",

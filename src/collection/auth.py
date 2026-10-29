@@ -60,26 +60,29 @@ class OAuthCallbackHandler(BaseHTTPRequestHandler):
         return
 
 
-def get_authorize_url() -> str:
+def get_authorize_url(oauth_host: str | None = None) -> str:
     """Generate HH OAuth authorize URL."""
+    host = oauth_host or settings.hh_oauth_host
     params = {
         "response_type": "code",
         "client_id": settings.hh_client_id,
         "redirect_uri": settings.hh_redirect_uri,
     }
-    return f"https://hh.ru/oauth/authorize?{urllib.parse.urlencode(params)}"
+    return f"https://{host}/oauth/authorize?{urllib.parse.urlencode(params)}"
 
 
-def exchange_code_for_token(code: str) -> dict:
+def exchange_code_for_token(code: str, oauth_host: str | None = None) -> dict:
     """Exchange authorization code for access and refresh tokens.
 
     Args:
         code: Authorization code received from redirect.
+        oauth_host: OAuth host domain ('rabota.by' or 'hh.ru').
 
     Returns:
         JSON response with access_token and refresh_token.
     """
-    token_url = "https://hh.ru/oauth/token"
+    host = oauth_host or settings.hh_oauth_host
+    token_url = f"https://{host}/oauth/token"
     payload = {
         "grant_type": "authorization_code",
         "client_id": settings.hh_client_id,
