@@ -1,8 +1,9 @@
 """Application configuration and environment loader."""
 
 import os
-from pathlib import Path
 from dataclasses import dataclass
+from pathlib import Path
+
 from dotenv import load_dotenv
 
 # Load .env if present
@@ -19,6 +20,7 @@ class Settings:
     hh_client_id: str = os.getenv("HH_CLIENT_ID", "")
     hh_client_secret: str = os.getenv("HH_CLIENT_SECRET", "")
     hh_redirect_uri: str = os.getenv("HH_REDIRECT_URI", "http://localhost:8000/callback")
+    hh_access_token: str = os.getenv("HH_ACCESS_TOKEN", "")
     hh_user_agent: str = os.getenv(
         "HH_USER_AGENT",
         "JobPulse/1.0 (academic-research-cis; https://github.com/tarasssevich/jobPulse)",

@@ -1,6 +1,7 @@
 """Test configuration and settings loader."""
 
 from pathlib import Path
+
 from src.utils.config import Settings
 
 
